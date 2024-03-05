@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "VeriTask"
+rootProject.name = "Android-Veritask"
 include(":app")
  
