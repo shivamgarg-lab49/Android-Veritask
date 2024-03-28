@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "743396834881",
+    "project_id": "veritask-a9a2d",
+    "storage_bucket": "veritask-a9a2d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:743396834881:android:a777903901deb3704610c0",
+        "android_client_info": {
+          "package_name": "com.satguru.veritask"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfCEchX1DpSPM_nTyVBzO7ZnXUHhy2UZA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
