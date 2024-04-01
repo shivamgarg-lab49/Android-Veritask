@@ -82,3 +82,10 @@ data class Manager(
     val name: String,
     val email: String,
 )
+
+@Keep
+data class RejectReasonItem(
+    val id: String,
+    val key: String,
+    val description: String,
+)

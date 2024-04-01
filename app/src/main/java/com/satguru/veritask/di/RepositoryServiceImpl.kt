@@ -7,6 +7,7 @@ import com.satguru.veritask.models.DealRejectRequest
 import com.satguru.veritask.models.DeviceInfo
 import com.satguru.veritask.models.Sales
 import com.satguru.veritask.extensions.UiState
+import com.satguru.veritask.models.RejectReasonItem
 import com.satguru.veritask.models.Users
 import com.satguru.veritask.services.ApiService
 import com.satguru.veritask.utils.SharedPreferences
@@ -27,6 +28,10 @@ class RepositoryServiceImpl @Inject constructor(
 
     override fun getDealDetails(dealId: String): Flow<UiState<BaseResponse<Sales>>> {
         return networkCall { apiService.getDealDetails(dealId) }
+    }
+
+    override fun getRejectReasons(): Flow<UiState<BaseResponse<List<RejectReasonItem>>>> {
+        return networkCall { apiService.rejectReasons() }
     }
 
     override fun approveDeal(

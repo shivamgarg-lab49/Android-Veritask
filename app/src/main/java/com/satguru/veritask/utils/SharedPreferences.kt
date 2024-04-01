@@ -57,6 +57,6 @@ class SharedPreferences(application: Application) {
     }
 
     fun isMyDealOn(): Boolean {
-       return sharedPreferences.getBoolean(MY_DEALS, false)
+       return true
     }
 }

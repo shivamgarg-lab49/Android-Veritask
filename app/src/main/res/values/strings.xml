@@ -17,6 +17,7 @@
     <string name="quantity">Quantity</string>
     <string name="total_price">Total Price</string>
     <string name="reject">Reject</string>
+    <string name="reject_with_comments">Reject with comments</string>
     <string name="approve">Approve</string>
     <string name="client">Client</string>
     <string name="status">Status</string>
@@ -43,4 +44,5 @@
     <string name="sale_rejected">Sale Rejected</string>
     <string name="view_other_tasks_pending_approval">View Other Tasks Pending Approval</string>
     <string name="will_be_notified">will be notified.</string>
+    <string name="reason_for_rejection">Reason for Rejection</string>
 </resources>

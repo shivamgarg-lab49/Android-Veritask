@@ -25,6 +25,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -42,6 +43,8 @@ import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.DeepLink
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.result.NavResult
+import com.ramcosta.composedestinations.result.ResultRecipient
 import com.satguru.veritask.R
 import com.satguru.veritask.extensions.UiState
 import com.satguru.veritask.extensions.toast
@@ -50,6 +53,7 @@ import com.satguru.veritask.ui.components.ErrorScreen
 import com.satguru.veritask.ui.components.ProgressBar
 import com.satguru.veritask.ui.components.Toolbar
 import com.satguru.veritask.ui.features.destinations.ConfirmationScreenDestination
+import com.satguru.veritask.ui.features.destinations.RejectPopUpOptionsDestination
 import com.satguru.veritask.ui.features.details.vm.SalesDetailViewModel
 import com.satguru.veritask.ui.theme.fcl_body1
 import com.satguru.veritask.ui.theme.fcl_body2
@@ -73,9 +77,11 @@ import com.satguru.veritask.utils.DeepLinkBuilder
 
 fun SalesDetails(
     dealId: String,
+    action: String,
     clientName: String? = null,
     salesDetailsVm: SalesDetailViewModel,
-    destinationsNavigator: DestinationsNavigator
+    destinationsNavigator: DestinationsNavigator,
+    resultRecipient: ResultRecipient<RejectPopUpOptionsDestination, String>
 ) {
     val staticToolbarTitle = clientName ?: stringResource(id = R.string.sales_details)
     var dynamicToolbarTitle by remember { mutableStateOf(staticToolbarTitle) }
@@ -214,9 +220,20 @@ fun SalesDetails(
                         if (salesDetailsVm.isSameManagerLoggedIn(sales.approverId)) {
                             ApproveOrRejectedComposable(
                                 modifier = Modifier.padding(16.dp),
-                                onApproved = salesDetailsVm::approve,
-                                onRejected = salesDetailsVm::reject
+                                onApproved = {
+                                    salesDetailsVm.approve()
+                                },
+                                onRejected = {
+                                    destinationsNavigator.navigate(RejectPopUpOptionsDestination)
+                                }
                             )
+                            SideEffect {
+                                if (action == Constants.APPROVED) {
+                                    salesDetailsVm.approve()
+                                } else if (action == Constants.REJECTED) {
+                                    destinationsNavigator.navigate(RejectPopUpOptionsDestination)
+                                }
+                            }
                         } else {
                             DisclaimerText(modifier = Modifier.padding(16.dp))
                         }
@@ -280,6 +297,16 @@ fun SalesDetails(
 
             else -> {
                 throw IllegalStateException("Dev issue")
+            }
+        }
+    }
+    resultRecipient.onNavResult { result ->
+        when (result) {
+            is NavResult.Canceled -> {
+            }
+
+            is NavResult.Value -> {
+                salesDetailsVm.reject(result.value)
             }
         }
     }
@@ -437,3 +464,5 @@ fun ProductRowItem(
         )
     }
 }
+
+

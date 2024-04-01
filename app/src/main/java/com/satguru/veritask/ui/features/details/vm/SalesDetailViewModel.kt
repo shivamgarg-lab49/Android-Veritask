@@ -88,7 +88,7 @@ class SalesDetailViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun reject(reason: String? = "Please make the changes ASAP") {
+    fun reject(reason: String) {
         val dealId = getDealId()
         val body = DealRejectRequest(
             approverId = getCurrentLoggedInUserId(),

@@ -19,12 +19,12 @@ object NotificationHelper {
     private const val EXTRA_TYPE = "type"
     private const val EXTRA_DEAL_ID = "dealId"
 
-    private const val TYPE_DEAL_CREATED = "dealCreated"
+    private const val TYPE_DEAL_CREATED = "DealCreated"
 
 
-    private const val CHANNEL_ID = "id_deals"
-    private const val CHANNEL_NAME = "Deals"
-    private const val CHANNEL_DESCRIPTION = "Deals notification"
+    private const val CHANNEL_ID = "default"
+    private const val CHANNEL_NAME = "Deal"
+    private const val CHANNEL_DESCRIPTION = "Deals creation notification"
 
     fun sendNotification(context: Context, remoteMessage: RemoteMessage) {
         // create notification channel
@@ -37,21 +37,24 @@ object NotificationHelper {
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(title)
-            .setContentText(message)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(message))
             .setAutoCancel(true)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 
         when (remoteMessage.data[EXTRA_TYPE].orEmpty()) {
             TYPE_DEAL_CREATED -> {
                 val dealId = remoteMessage.data[EXTRA_DEAL_ID].orEmpty()
-                val intent = Intent(
-                    context,
-                    DeeplinkActivity::class.java
+                builder.setContentIntent(getDealDetailIntent(context, dealId, Constants.NO_ACTION))
+                builder.addAction(
+                    0,
+                    context.getString(R.string.approve),
+                    getDealDetailIntent(context, dealId, Constants.APPROVED)
                 )
-                intent.data = Uri.parse(DeepLinkBuilder.createDealsDetailDeepLink(dealId))
-                val activity =
-                    PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-                builder.setContentIntent(activity)
+                builder.addAction(
+                    0,
+                    context.getString(R.string.reject_with_comments),
+                    getDealDetailIntent(context, dealId, Constants.REJECTED)
+                )
             }
 
             "" -> {}
@@ -76,5 +79,19 @@ object NotificationHelper {
             val notificationManager = context.getSystemService(NotificationManager::class.java)
             notificationManager.createNotificationChannel(channel)
         }
+    }
+
+    private fun getDealDetailIntent(
+        context: Context,
+        dealId: String,
+        action: String
+    ): PendingIntent {
+        val intent = Intent(
+            context,
+            DeeplinkActivity::class.java
+        )
+
+        intent.data = Uri.parse(DeepLinkBuilder.createDealsDetailDeepLink(dealId, action))
+        return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
     }
 }

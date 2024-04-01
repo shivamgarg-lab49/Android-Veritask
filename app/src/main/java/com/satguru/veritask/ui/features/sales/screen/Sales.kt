@@ -3,10 +3,12 @@
 package com.satguru.veritask.ui.features.sales.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -60,6 +62,7 @@ import com.satguru.veritask.ui.features.sales.vm.SalesViewModel
 import com.satguru.veritask.ui.theme.fcl_body2
 import com.satguru.veritask.ui.theme.fcl_content
 import com.satguru.veritask.ui.theme.fcl_primary_500
+import com.satguru.veritask.utils.Constants
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -72,63 +75,79 @@ fun Sales(
         verticalArrangement = Arrangement.Top,
     ) {
 
-        var expanded by remember { mutableStateOf(false) }
+//        var expanded by remember { mutableStateOf(false) }
         val uiStateForSalesData by salesVM.uiStateForSalesData.collectAsState(UiState.Loading)
         val selectedTabIndex by salesVM.selectedTabIndex.collectAsState()
 
         val isRefreshing by salesVM.isRefreshing.collectAsState()
-        val isMyDealOn by salesVM.isMyDealOn.collectAsState()
+//        val isMyDealOn by salesVM.isMyDealOn.collectAsState()
         val pullRefreshState =
             rememberPullRefreshState(isRefreshing, { salesVM.fetch(SalesViewModel.OpType.Pull) })
-        val context = LocalContext.current
         Toolbar(title = { Text(text = stringResource(id = R.string.title_sales)) }, actions = {
-            Box(
-                modifier = Modifier.wrapContentSize(Alignment.TopStart)
-            ) {
-                IconButton(onClick = { expanded = true }) {
-                    Icon(
-                        Icons.Default.MoreVert,
-                        contentDescription = stringResource(R.string.context_menu_icon)
-                    )
-                }
-                DropdownMenu(modifier = Modifier.background(color = Color(0xB3000000)),
-//                    modifier = Modifier.background(color = MaterialTheme.colors.fcl_neutral_900),
-                    expanded = expanded, onDismissRequest = { expanded = false }) {
-                    DropdownMenuItem(onClick = { salesVM.toggleMyDeal() }) {
-                        Text(
-                            text = stringResource(R.string.my_sales),
-                            color = MaterialTheme.colors.fcl_content,
-                            style = MaterialTheme.typography.fcl_body2
-                        )
-                        Spacer(modifier = Modifier.size(8.dp))
-                        Switch(
-                            checked = isMyDealOn,
-                            onCheckedChange = { salesVM.toggleMyDeal() },
-                            colors = SwitchDefaults.colors(
-                                checkedThumbColor = MaterialTheme.colors.fcl_primary_500,
-                            )
-                        )
-                    }
-                    DropdownMenuItem(onClick = {
-                        salesVM.logout(destinationsNavigator) {
-                            context.toast(message = context.getString(R.string.logout_successful))
-                        }
-                    }) {
-                        val loggedInUser = salesVM.getLoggedInUser()
-                        Text(
-                            text = loggedInUser?.name ?: stringResource(id = R.string.logout),
-                            color = MaterialTheme.colors.fcl_content,
-                            style = MaterialTheme.typography.fcl_body2,
-                        )
-                        Spacer(modifier = Modifier.size(8.dp))
-                        Icon(
-                            tint = MaterialTheme.colors.fcl_content,
-                            imageVector = Icons.AutoMirrored.Filled.ExitToApp,
-                            contentDescription = stringResource(id = R.string.logout)
-                        )
-                    }
-                }
+            val loggedInUser = salesVM.getLoggedInUser()
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.clickable { salesVM.logout(destinationsNavigator) }) {
+                Text(
+                    text = loggedInUser?.name ?: stringResource(id = R.string.logout),
+                    color = MaterialTheme.colors.fcl_content,
+                    style = MaterialTheme.typography.fcl_body2,
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+                Icon(
+                    tint = MaterialTheme.colors.fcl_content,
+                    imageVector = Icons.AutoMirrored.Filled.ExitToApp,
+                    contentDescription = stringResource(id = R.string.logout)
+                )
             }
+
+//            Box(
+//                modifier = Modifier.wrapContentSize(Alignment.TopStart)
+//            ) {
+//                IconButton(onClick = { expanded = true }) {
+//                    Icon(
+//                        Icons.Default.MoreVert,
+//                        contentDescription = stringResource(R.string.context_menu_icon)
+//                    )
+//                }
+//                DropdownMenu(modifier = Modifier.background(color = Color(0xB3000000)),
+////                    modifier = Modifier.background(color = MaterialTheme.colors.fcl_neutral_900),
+//                    expanded = expanded, onDismissRequest = { expanded = false }) {
+//                    DropdownMenuItem(onClick = { salesVM.toggleMyDeal() }) {
+//                        Text(
+//                            text = stringResource(R.string.my_sales),
+//                            color = MaterialTheme.colors.fcl_content,
+//                            style = MaterialTheme.typography.fcl_body2
+//                        )
+//                        Spacer(modifier = Modifier.size(8.dp))
+//                        Switch(
+//                            checked = isMyDealOn,
+//                            onCheckedChange = { salesVM.toggleMyDeal() },
+//                            colors = SwitchDefaults.colors(
+//                                checkedThumbColor = MaterialTheme.colors.fcl_primary_500,
+//                            )
+//                        )
+//                    }
+//                    DropdownMenuItem(onClick = {
+//                        salesVM.logout(destinationsNavigator) {
+//                            context.toast(message = context.getString(R.string.logout_successful))
+//                        }
+//                    }) {
+//                        val loggedInUser = salesVM.getLoggedInUser()
+//                        Text(
+//                            text = loggedInUser?.name ?: stringResource(id = R.string.logout),
+//                            color = MaterialTheme.colors.fcl_content,
+//                            style = MaterialTheme.typography.fcl_body2,
+//                        )
+//                        Spacer(modifier = Modifier.size(8.dp))
+//                        Icon(
+//                            tint = MaterialTheme.colors.fcl_content,
+//                            imageVector = Icons.AutoMirrored.Filled.ExitToApp,
+//                            contentDescription = stringResource(id = R.string.logout)
+//                        )
+//                    }
+//                }
+//            }
         })
 
         SegmentedControl(
@@ -156,6 +175,7 @@ fun Sales(
                     is UiState.Ideal -> {
 
                     }
+
                     is UiState.Loading -> {
                         item {
                             ProgressBar(
@@ -186,7 +206,9 @@ fun Sales(
                             SaleItem(item = saleItem) {
                                 destinationsNavigator.navigate(
                                     SalesDetailsDestination(
-                                        dealId = it.id, clientName = it.client.name
+                                        dealId = it.id,
+                                        action = Constants.NO_ACTION,
+                                        clientName = it.client.name
                                     )
                                 )
                             }

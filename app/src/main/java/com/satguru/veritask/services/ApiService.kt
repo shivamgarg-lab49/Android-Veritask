@@ -4,6 +4,7 @@ import com.satguru.veritask.models.BaseResponse
 import com.satguru.veritask.models.DealApproveRequest
 import com.satguru.veritask.models.DealRejectRequest
 import com.satguru.veritask.models.DeviceInfo
+import com.satguru.veritask.models.RejectReasonItem
 import com.satguru.veritask.models.Sales
 import com.satguru.veritask.models.Users
 import retrofit2.Response
@@ -21,6 +22,9 @@ interface ApiService {
 
     @GET("api/deals/{dealId}")
     suspend fun getDealDetails(@Path("dealId") dealId: String): Response<BaseResponse<Sales>>
+
+    @GET("api/reject-reasons")
+    suspend fun rejectReasons(): Response<BaseResponse<List<RejectReasonItem>>>
 
     @PATCH("api/deals/{dealId}")
     suspend fun approveDeal(

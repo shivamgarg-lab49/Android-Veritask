@@ -21,10 +21,12 @@ import com.google.accompanist.permissions.rememberPermissionState
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.navigation.dependency
 import com.satguru.veritask.ui.features.NavGraphs
+import com.satguru.veritask.ui.features.destinations.RejectPopUpOptionsDestination
 import com.satguru.veritask.ui.features.destinations.SalesDestination
 import com.satguru.veritask.ui.features.destinations.SalesDetailsDestination
 import com.satguru.veritask.ui.features.destinations.UsersScreenDestination
 import com.satguru.veritask.ui.features.details.vm.SalesDetailViewModel
+import com.satguru.veritask.ui.features.reject.vm.RejectPopupViewModel
 import com.satguru.veritask.ui.features.sales.vm.SalesViewModel
 import com.satguru.veritask.ui.features.users.vm.UsersViewModel
 import com.satguru.veritask.ui.theme.VeriTaskTheme
@@ -45,6 +47,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val rejectOptionVM = hiltViewModel<RejectPopupViewModel>()
             navController = rememberNavController()
             VeriTaskTheme {
                 Surface(
@@ -56,13 +59,13 @@ class MainActivity : ComponentActivity() {
                     if (!state.status.isGranted) {
                         LaunchedEffect(key1 = Unit, block = { state.launchPermissionRequest() })
                     }
-                    DestinationsNavHost(
-                        navGraph = NavGraphs.root,
+                    DestinationsNavHost(navGraph = NavGraphs.root,
                         navController = navController!!,
                         dependenciesContainerBuilder = {
                             dependency(UsersScreenDestination) { hiltViewModel<UsersViewModel>() }
                             dependency(SalesDestination) { hiltViewModel<SalesViewModel>() }
                             dependency(SalesDetailsDestination) { hiltViewModel<SalesDetailViewModel>() }
+                            dependency(RejectPopUpOptionsDestination) { rejectOptionVM }
                         })
                 }
             }
