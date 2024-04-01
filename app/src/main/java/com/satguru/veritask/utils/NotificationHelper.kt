@@ -26,7 +26,7 @@ object NotificationHelper {
     private const val CHANNEL_NAME = "Deal"
     private const val CHANNEL_DESCRIPTION = "Deals creation notification"
 
-    fun sendNotification(context: Context, remoteMessage: RemoteMessage) {
+    fun sendNotification(context: Context, remoteMessage: RemoteMessage, notificationId: Int) {
         // create notification channel
         createNotificationChannel(context)
 
@@ -39,21 +39,29 @@ object NotificationHelper {
             .setContentTitle(title)
             .setStyle(NotificationCompat.BigTextStyle().bigText(message))
             .setAutoCancel(true)
+            .setOngoing(false)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 
         when (remoteMessage.data[EXTRA_TYPE].orEmpty()) {
             TYPE_DEAL_CREATED -> {
                 val dealId = remoteMessage.data[EXTRA_DEAL_ID].orEmpty()
-                builder.setContentIntent(getDealDetailIntent(context, dealId, Constants.NO_ACTION))
+                builder.setContentIntent(
+                    getDealDetailIntent(
+                        context,
+                        dealId,
+                        Constants.NO_ACTION,
+                        notificationId
+                    )
+                )
                 builder.addAction(
                     0,
                     context.getString(R.string.approve),
-                    getDealDetailIntent(context, dealId, Constants.APPROVED)
+                    getDealDetailIntent(context, dealId, Constants.APPROVED, notificationId)
                 )
                 builder.addAction(
                     0,
                     context.getString(R.string.reject_with_comments),
-                    getDealDetailIntent(context, dealId, Constants.REJECTED)
+                    getDealDetailIntent(context, dealId, Constants.REJECTED, notificationId)
                 )
             }
 
@@ -62,7 +70,7 @@ object NotificationHelper {
 
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.notify(1, builder.build())
+        notificationManager.notify(notificationId, builder.build())
     }
 
     private fun createNotificationChannel(context: Context) {
@@ -84,13 +92,15 @@ object NotificationHelper {
     private fun getDealDetailIntent(
         context: Context,
         dealId: String,
-        action: String
+        action: String,
+        notificationId: Int
     ): PendingIntent {
         val intent = Intent(
             context,
             DeeplinkActivity::class.java
         )
 
+        intent.putExtra(Constants.NOTIFICATION_ID, notificationId)
         intent.data = Uri.parse(DeepLinkBuilder.createDealsDetailDeepLink(dealId, action))
         return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
     }

@@ -11,6 +11,7 @@ class SharedPreferences(application: Application) {
         private const val PREFS_NAME = "vt-preferences"
         private const val SAVED_USER = "v_saved_user_info"
         private const val MY_DEALS = "v_my_deal_on"
+        private const val NOTIFICATION_ID = "notification_id"
     }
 
     private val sharedPreferences: SharedPreferences =
@@ -32,6 +33,12 @@ class SharedPreferences(application: Application) {
         } catch (_: Exception) {
         }
         return null
+    }
+
+    fun getNotificationId(): Int {
+        var notificationId = sharedPreferences.getInt(NOTIFICATION_ID, 1000)
+        editor.putInt(NOTIFICATION_ID, ++notificationId).apply()
+        return notificationId
     }
 
     fun requireLoggedInUser(): Users {
@@ -57,6 +64,6 @@ class SharedPreferences(application: Application) {
     }
 
     fun isMyDealOn(): Boolean {
-       return true
+        return true
     }
 }

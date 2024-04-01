@@ -45,6 +45,7 @@ class VeriTaskMessagingService : FirebaseMessagingService() {
             NotificationHelper.sendNotification(
                 context = this,
                 remoteMessage = remoteMessage,
+                repositoryService.getSharedPreference().getNotificationId()
             )
         }
     }

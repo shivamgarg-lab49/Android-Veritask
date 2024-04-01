@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 object Constants {
+    const val NOTIFICATION_ID: String = "NOTIFICATION_ID"
     const val NO_ACTION: String = "NO_ACTION"
     const val PENDING = "Pending"
     const val APPROVED = "Approved"
