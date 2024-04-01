@@ -19,7 +19,9 @@ object NotificationHelper {
     private const val EXTRA_TYPE = "type"
     private const val EXTRA_DEAL_ID = "dealId"
 
+
     private const val TYPE_DEAL_CREATED = "DealCreated"
+    private val SUPPORTED_TYPES = listOf(TYPE_DEAL_CREATED)
 
 
     private const val CHANNEL_ID = "default"
@@ -42,7 +44,11 @@ object NotificationHelper {
             .setOngoing(false)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 
-        when (remoteMessage.data[EXTRA_TYPE].orEmpty()) {
+        val notificationType = remoteMessage.data[EXTRA_TYPE].orEmpty()
+        if (!SUPPORTED_TYPES.contains(notificationType)) {
+            return
+        }
+        when (notificationType) {
             TYPE_DEAL_CREATED -> {
                 val dealId = remoteMessage.data[EXTRA_DEAL_ID].orEmpty()
                 builder.setContentIntent(
