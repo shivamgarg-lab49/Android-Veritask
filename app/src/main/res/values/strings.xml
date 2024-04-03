@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">VeriTask</string>
+    <string name="app_name">Veritask</string>
     <string name="title_sales">Sales</string>
     <string name="pending">Pending</string>
     <string name="approved">Approved</string>

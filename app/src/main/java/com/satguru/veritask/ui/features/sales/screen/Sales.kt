@@ -88,7 +88,7 @@ fun Sales(
 
         SegmentedControl(
             modifier = Modifier
-                .padding(top = 16.dp)
+                .padding(top = 16.dp, bottom = 8.dp)
                 .height(30.dp), items = listOf(
                 stringResource(id = R.string.pending),
                 stringResource(id = R.string.approved),

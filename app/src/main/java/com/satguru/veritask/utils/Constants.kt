@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 object Constants {
-    const val DEFAULT_PASSWORD: String = "123456"
+    const val DEFAULT_PASSWORD: String = "12345678"
     const val NOTIFICATION_ID: String = "NOTIFICATION_ID"
     const val NO_ACTION: String = "NO_ACTION"
     const val PENDING = "Pending"

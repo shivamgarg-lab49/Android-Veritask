@@ -22,17 +22,13 @@ object NetworkModule {
     @Singleton
     fun baseUrl(): String {
         return "https://veritask.vercel.app/"
-//        return "http://10.0.2.2:3000/"
     }
 
     @Provides
     @Singleton
     fun provideApiService(@Named("baseUrl") baseUrl: String): ApiService {
-        val interceptor = HttpLoggingInterceptor().apply {
-            this.level = HttpLoggingInterceptor.Level.BODY
-        }
         val client = OkHttpClient.Builder().apply {
-            this.addInterceptor(interceptor)
+            this
                 .connectTimeout(5, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)
                 .writeTimeout(25, TimeUnit.SECONDS)
