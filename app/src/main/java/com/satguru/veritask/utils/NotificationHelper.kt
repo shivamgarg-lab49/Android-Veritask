@@ -1,18 +1,26 @@
 package com.satguru.veritask.utils
 
+import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import com.google.firebase.messaging.RemoteMessage
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.satguru.veritask.BaseMessage
-import com.satguru.veritask.SharedApp
 import com.satguru.veritask.DeeplinkActivity
 import com.satguru.veritask.R
+import com.satguru.veritask.SharedApp
+import com.satguru.veritask.models.User
+
 
 object NotificationHelper {
 
@@ -30,7 +38,30 @@ object NotificationHelper {
     private const val CHANNEL_NAME = "Deal"
     private const val CHANNEL_DESCRIPTION = "Deals creation notification"
 
-    fun sendNotification(context: Context, remoteMessage: RemoteMessage, notificationId: Int) {
+    fun sendNotification(
+        context: Context,
+        remoteMessage: RemoteMessage,
+        notificationId: Int,
+        loggedInUser: User?
+    ) {
+        val gson = Gson()
+        val gsonType = object : TypeToken<Any?>() {}.type
+        val gsonString: String = gson.toJson(remoteMessage.data, gsonType)
+        println("onMessageReceived--------------------------------------------")
+        println("onMessageReceived--->>>   $gsonString")
+
+        val notificationType = remoteMessage.data[EXTRA_TYPE].orEmpty()
+        if (!areNotificationOn(context)
+            || !SUPPORTED_TYPES.contains(notificationType)
+            || loggedInUser?.id.isNullOrBlank()
+        ) {
+            println("onMessageReceived--->>>  check failed")
+            println("onMessageReceived--------------------------------------------")
+            return
+        }
+        println("onMessageReceived--->>>  check passed, about to show notification")
+        println("onMessageReceived--------------------------------------------")
+
         // create notification channel
         createNotificationChannel(context)
 
@@ -46,10 +77,6 @@ object NotificationHelper {
             .setOngoing(false)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 
-        val notificationType = remoteMessage.data[EXTRA_TYPE].orEmpty()
-        if (!SUPPORTED_TYPES.contains(notificationType)) {
-            return
-        }
         when (notificationType) {
             TYPE_DEAL_CREATED -> {
                 val dealId = remoteMessage.data[EXTRA_DEAL_ID].orEmpty()
@@ -82,19 +109,32 @@ object NotificationHelper {
         notificationManager.notify(notificationId, builder.build())
     }
 
+    private fun areNotificationOn(context: Context): Boolean {
+        val permissionState =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
+            } else {
+                PackageManager.PERMISSION_GRANTED
+            }
+        val permissionGranted = permissionState == PackageManager.PERMISSION_GRANTED
+        val isChannelOn = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationManagerCompat.from(context).getNotificationChannel(CHANNEL_ID)
+            channel != null && channel.importance != NotificationManager.IMPORTANCE_NONE
+        } else {
+            true
+        }
+        return permissionGranted && isChannelOn
+    }
+
     private fun createNotificationChannel(context: Context) {
-        // Create Notification Channel only for Android 8.0 (Oreo) and above
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
                 CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_DEFAULT
+                NotificationManager.IMPORTANCE_HIGH
             )
             channel.description = CHANNEL_DESCRIPTION
-
-            // Register the channel with the system
-            val notificationManager = context.getSystemService(NotificationManager::class.java)
-            notificationManager.createNotificationChannel(channel)
+            NotificationManagerCompat.from(context).createNotificationChannel(channel)
         }
     }
 

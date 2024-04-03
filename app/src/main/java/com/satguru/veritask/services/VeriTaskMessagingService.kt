@@ -2,8 +2,6 @@ package com.satguru.veritask.services
 
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.satguru.veritask.di.RepositoryService
 import com.satguru.veritask.utils.Constants
 import com.satguru.veritask.utils.NotificationHelper
@@ -36,17 +34,11 @@ class VeriTaskMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
-        val gson = Gson()
-        val gsonType = object : TypeToken<Any?>() {}.type
-        val gsonString: String = gson.toJson(remoteMessage.data, gsonType)
-        println("onMessageReceived--->>>   $gsonString")
-        val user = repositoryService.getSharedPreference().getLoggedInUser()
-        if (user != null && user.id.isNotEmpty()) {
-            NotificationHelper.sendNotification(
-                context = this,
-                remoteMessage = remoteMessage,
-                repositoryService.getSharedPreference().getNotificationId()
-            )
-        }
+        NotificationHelper.sendNotification(
+            context = this,
+            remoteMessage = remoteMessage,
+            repositoryService.getSharedPreference().getNotificationId(),
+            repositoryService.getSharedPreference().getLoggedInUser()
+        )
     }
 }

@@ -7,12 +7,15 @@ import androidx.lifecycle.ProcessLifecycleOwner
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 
 object SharedApp : LifecycleEventObserver {
 
     private var isAppInForeground = false
-    val queue = MutableSharedFlow<BaseMessage>()
+
+    private val _queue = MutableSharedFlow<BaseMessage>()
+    val queue = _queue.asSharedFlow()
 
     fun isAppInForeground(): Boolean {
         return isAppInForeground
@@ -20,8 +23,8 @@ object SharedApp : LifecycleEventObserver {
 
     @OptIn(DelicateCoroutinesApi::class)
     fun postMessage(newMessage: BaseMessage) {
-        if (!queue.tryEmit(newMessage)) {
-            GlobalScope.launch { queue.emit(newMessage) }
+        if (!_queue.tryEmit(newMessage)) {
+            GlobalScope.launch { _queue.emit(newMessage) }
         }
     }
 
