@@ -146,14 +146,12 @@ fun PasswordItem(user: User, onLogin: (User) -> Unit, onBack: () -> Unit) {
     }
 }
 
-@Preview(showSystemUi = true, showBackground = true)
+@Preview(showSystemUi = true, showBackground = true, backgroundColor = 0xff171A1C)
 @Composable
 fun PasswordItemPreview() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .wrapContentHeight()
-            .padding(vertical = 100.dp, horizontal = 24.dp)
             .background(MaterialTheme.colors.fcl_neutral_700, RoundedCornerShape(8.dp))
     ) {
         PasswordItem(

@@ -9,21 +9,19 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
-object AppLifecycleObserver : LifecycleEventObserver {
+object SharedApp : LifecycleEventObserver {
 
     private var isAppInForeground = false
-    private val state = MutableSharedFlow<String>()
+    val queue = MutableSharedFlow<BaseMessage>()
 
     fun isAppInForeground(): Boolean {
         return isAppInForeground
     }
 
     @OptIn(DelicateCoroutinesApi::class)
-    fun updateState(newValue: String) {
-        if (!state.tryEmit(newValue)) {
-            GlobalScope.launch {
-                state.emit(newValue)
-            }
+    fun postMessage(newMessage: BaseMessage) {
+        if (!queue.tryEmit(newMessage)) {
+            GlobalScope.launch { queue.emit(newMessage) }
         }
     }
 

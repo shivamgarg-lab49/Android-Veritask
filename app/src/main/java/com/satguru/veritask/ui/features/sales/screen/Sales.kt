@@ -31,7 +31,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.satguru.veritask.BaseMessage
 import com.satguru.veritask.R
+import com.satguru.veritask.SharedApp
 import com.satguru.veritask.extensions.UiState
 import com.satguru.veritask.models.Sales
 import com.satguru.veritask.ui.components.Empty
@@ -44,6 +46,10 @@ import com.satguru.veritask.ui.features.sales.vm.SalesViewModel
 import com.satguru.veritask.ui.theme.fcl_body2
 import com.satguru.veritask.ui.theme.fcl_content
 import com.satguru.veritask.utils.Constants
+import kotlinx.coroutines.flow.filterIsInstance
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -130,7 +136,11 @@ fun Sales(
                 modifier = Modifier.align(Alignment.TopCenter)
             )
             LaunchedEffect(key1 = Unit, block = {
-                salesVM.fetch(SalesViewModel.OpType.Fresh)
+                SharedApp.queue
+                    .onStart { salesVM.fetch(SalesViewModel.OpType.Fresh) }
+                    .filterIsInstance<BaseMessage.DealCreatedMessage>()
+                    .onEach { salesVM.fetch(SalesViewModel.OpType.Fresh) }
+                    .launchIn(this)
             })
         }
     }

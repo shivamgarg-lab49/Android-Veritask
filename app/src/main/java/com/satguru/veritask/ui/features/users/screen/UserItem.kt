@@ -56,7 +56,7 @@ fun UserItem(user: User, onItemClick: (User) -> Unit = {}) {
     }
 }
 
-@Preview(showSystemUi = true, showBackground = true)
+@Preview(showSystemUi = true, showBackground = true, backgroundColor = 0xff171A1C)
 @Composable
 fun UsersItemPreview() {
     UserItem(user = PreviewDataProvider.getUsers(LocalContext.current).first())

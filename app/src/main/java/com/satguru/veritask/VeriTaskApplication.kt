@@ -8,6 +8,6 @@ class VeriTaskApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        AppLifecycleObserver.init()
+        SharedApp.init()
     }
 }

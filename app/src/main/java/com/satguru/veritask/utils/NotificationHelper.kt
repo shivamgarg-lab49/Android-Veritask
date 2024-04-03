@@ -9,7 +9,8 @@ import android.net.Uri
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.RemoteMessage
-import com.satguru.veritask.AppLifecycleObserver
+import com.satguru.veritask.BaseMessage
+import com.satguru.veritask.SharedApp
 import com.satguru.veritask.DeeplinkActivity
 import com.satguru.veritask.R
 
@@ -70,7 +71,7 @@ object NotificationHelper {
                     context.getString(R.string.reject_with_comments),
                     getDealDetailIntent(context, dealId, Constants.REJECTED, notificationId)
                 )
-                AppLifecycleObserver.updateState("$notificationType<>$dealId")
+                SharedApp.postMessage(BaseMessage.DealCreatedMessage(dealId = dealId))
             }
 
             "" -> {}

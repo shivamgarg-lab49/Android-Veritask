@@ -13,19 +13,21 @@ import com.satguru.veritask.models.Sales
 import com.satguru.veritask.ui.components.AppLazyColumn
 
 @Composable
-fun SalesLazyColumn(items: List<Sales>, onItemClick: (Sales) -> Unit = {}) {
+fun SalesLazyColumn(
+    items: List<Sales>,
+    onItemClick: (Sales) -> Unit = {}
+) {
     AppLazyColumn(
         items = items,
         keyExtractor = { it.id },
         itemContent = { SaleItem(item = it, onItemClick = onItemClick) },
         modifier = Modifier.fillMaxWidth(),
         contentPadding = PaddingValues(all = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(space = 8.dp)
+        verticalArrangement = Arrangement.spacedBy(space = 8.dp),
     )
 }
 
-
-@Preview(showSystemUi = true, showBackground = true)
+@Preview(showSystemUi = true, showBackground = true, backgroundColor = 0xff171A1C)
 @Composable
 fun SalesLazyColumnPreview() {
     val items = PreviewDataProvider.getDeals(LocalContext.current)
