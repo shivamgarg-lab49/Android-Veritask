@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.satguru.veritask.BaseViewModel
 import com.satguru.veritask.di.RepositoryService
 import com.satguru.veritask.extensions.UiState
-import com.satguru.veritask.models.Users
+import com.satguru.veritask.models.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,23 +21,23 @@ class UsersViewModel @Inject constructor(
 ) : BaseViewModel(application, repositoryService) {
 
     private var _usersJob: Job? = null
-    private val _uiStateForUsersData = MutableStateFlow<UiState<List<Users>>>(UiState.Loading)
-    val uiStateForUsersData = _uiStateForUsersData.asStateFlow()
+    private val _uiStateForUserData = MutableStateFlow<UiState<List<User>>>(UiState.Loading)
+    val uiStateForUsersData = _uiStateForUserData.asStateFlow()
 
     fun fetch() {
         _usersJob?.cancel()
         _usersJob = repositoryService.getUsers().onEach { it ->
             when (it) {
                 is UiState.Loading -> {
-                    _uiStateForUsersData.value = UiState.Loading
+                    _uiStateForUserData.value = UiState.Loading
                 }
 
                 is UiState.Error -> {
-                    _uiStateForUsersData.value = UiState.Error(it.error)
+                    _uiStateForUserData.value = UiState.Error(it.error)
                 }
 
                 is UiState.Success -> {
-                    _uiStateForUsersData.value =
+                    _uiStateForUserData.value =
                         UiState.Success(it.data.data.filter { user -> user.role.lowercase() == "Manager".lowercase() })
                 }
             }

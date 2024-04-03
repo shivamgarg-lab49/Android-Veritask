@@ -9,7 +9,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.satguru.veritask.di.RepositoryService
 import com.satguru.veritask.extensions.UiState
 import com.satguru.veritask.models.DeviceInfo
-import com.satguru.veritask.models.Users
+import com.satguru.veritask.models.User
 import com.satguru.veritask.ui.features.destinations.SalesDestination
 import com.satguru.veritask.ui.features.destinations.UsersScreenDestination
 import com.satguru.veritask.utils.Constants
@@ -26,11 +26,11 @@ abstract class BaseViewModel(
     private val _uiStateForLoginApi = MutableStateFlow<UiState<DeviceInfo>>(UiState.Ideal)
     val uiStateForLoginData get() = _uiStateForLoginApi.asStateFlow()
 
-    private val _selectedUser = MutableStateFlow<Users?>(null)
+    private val _selectedUser = MutableStateFlow<User?>(null)
     val selectedUser = _selectedUser.asStateFlow()
 
-    fun setSelectedUser(users: Users?) {
-        _selectedUser.value = users
+    fun setSelectedUser(user: User?) {
+        _selectedUser.value = user
     }
 
     fun checkLoginState(userLoggedIn: () -> Unit, userNotLoggedIn: () -> Unit) {
@@ -42,7 +42,7 @@ abstract class BaseViewModel(
     }
 
     fun login(
-        loggedInUser: Users,
+        loggedInUser: User,
     ) {
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
@@ -81,7 +81,7 @@ abstract class BaseViewModel(
         }
     }
 
-    fun logout(navigator: DestinationsNavigator, onLogout: (Users) -> Unit = {}) {
+    fun logout(navigator: DestinationsNavigator, onLogout: (User) -> Unit = {}) {
         val preference = repositoryService.getSharedPreference()
         if (preference.isLoggedIn()) {
             val user = preference.requireLoggedInUser()

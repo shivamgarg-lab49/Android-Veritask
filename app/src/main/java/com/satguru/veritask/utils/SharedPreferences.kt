@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
-import com.satguru.veritask.models.Users
+import com.satguru.veritask.models.User
 
 class SharedPreferences(application: Application) {
     companion object {
@@ -18,15 +18,15 @@ class SharedPreferences(application: Application) {
         application.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     private val editor: SharedPreferences.Editor = sharedPreferences.edit()
 
-    fun setLoggedInUser(user: Users?) {
+    fun setLoggedInUser(user: User?) {
         editor.putString(SAVED_USER, Gson().toJson(user))
         editor.apply()
     }
 
-    fun getLoggedInUser(): Users? {
+    fun getLoggedInUser(): User? {
         val savedUsers = sharedPreferences.getString(SAVED_USER, "") ?: ""
         try {
-            val user = Gson().fromJson(savedUsers, Users::class.java)
+            val user = Gson().fromJson(savedUsers, User::class.java)
             if (user.id.isNotEmpty()) {
                 return user
             }
@@ -41,7 +41,7 @@ class SharedPreferences(application: Application) {
         return notificationId
     }
 
-    fun requireLoggedInUser(): Users {
+    fun requireLoggedInUser(): User {
         val loggedInUser = getLoggedInUser()
         if (loggedInUser != null) {
             return loggedInUser

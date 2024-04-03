@@ -1,7 +1,5 @@
 package com.satguru.veritask.models
 
-import com.google.gson.annotations.SerializedName
-
 
 import androidx.annotation.Keep
 
@@ -68,7 +66,7 @@ data class DeviceInfo(
 )
 
 @Keep
-data class Users(
+data class User(
     val id: String,
     val name: String,
     val role: String,

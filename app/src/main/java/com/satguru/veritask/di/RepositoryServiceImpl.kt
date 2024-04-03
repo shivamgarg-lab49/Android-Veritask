@@ -8,7 +8,7 @@ import com.satguru.veritask.models.DeviceInfo
 import com.satguru.veritask.models.Sales
 import com.satguru.veritask.extensions.UiState
 import com.satguru.veritask.models.RejectReasonItem
-import com.satguru.veritask.models.Users
+import com.satguru.veritask.models.User
 import com.satguru.veritask.services.ApiService
 import com.satguru.veritask.utils.SharedPreferences
 import kotlinx.coroutines.flow.Flow
@@ -18,7 +18,7 @@ class RepositoryServiceImpl @Inject constructor(
     private val apiService: ApiService,
     private val sharedPreferences: SharedPreferences
 ) : RepositoryService {
-    override fun getUsers(): Flow<UiState<BaseResponse<List<Users>>>> {
+    override fun getUsers(): Flow<UiState<BaseResponse<List<User>>>> {
         return networkCall { apiService.getUsers() }
     }
 

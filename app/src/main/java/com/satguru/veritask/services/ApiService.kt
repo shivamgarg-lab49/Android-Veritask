@@ -6,7 +6,7 @@ import com.satguru.veritask.models.DealRejectRequest
 import com.satguru.veritask.models.DeviceInfo
 import com.satguru.veritask.models.RejectReasonItem
 import com.satguru.veritask.models.Sales
-import com.satguru.veritask.models.Users
+import com.satguru.veritask.models.User
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -16,7 +16,7 @@ import retrofit2.http.Path
 
 interface ApiService {
     @GET("api/users")
-    suspend fun getUsers(): Response<BaseResponse<List<Users>>>
+    suspend fun getUsers(): Response<BaseResponse<List<User>>>
     @GET("api/deals")
     suspend fun getDeals(): Response<BaseResponse<List<Sales>>>
 

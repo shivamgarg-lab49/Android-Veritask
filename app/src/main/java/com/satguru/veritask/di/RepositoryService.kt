@@ -7,13 +7,13 @@ import com.satguru.veritask.models.DealRejectRequest
 import com.satguru.veritask.models.DeviceInfo
 import com.satguru.veritask.models.RejectReasonItem
 import com.satguru.veritask.models.Sales
-import com.satguru.veritask.models.Users
+import com.satguru.veritask.models.User
 import com.satguru.veritask.utils.SharedPreferences
 import kotlinx.coroutines.flow.Flow
 
 interface RepositoryService {
 
-    fun getUsers(): Flow<UiState<BaseResponse<List<Users>>>>
+    fun getUsers(): Flow<UiState<BaseResponse<List<User>>>>
     fun getDeals(): Flow<UiState<BaseResponse<List<Sales>>>>
     fun getDealDetails(dealId: String): Flow<UiState<BaseResponse<Sales>>>
 
