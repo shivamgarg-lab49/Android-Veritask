@@ -1,0 +1,56 @@
+[
+  {
+    "id": "27af49e7-eade-4225-a3db-0bd3405cd54e",
+    "name": "Ethan Williams",
+    "email": "ethan@corp.in",
+    "role": "Manager",
+    "manager": null
+  },
+  {
+    "id": "c76a09cb-113e-4688-9517-f11e1383d4e7",
+    "name": "Olivia Jones",
+    "email": "Olivia@corp.in",
+    "role": "Manager",
+    "manager": null
+  },
+  {
+    "id": "fa67f611-c67a-460d-a313-143685dc2dda",
+    "name": "Samantha Taylor",
+    "email": "samantha@corp.in",
+    "role": "Manager",
+    "manager": null
+  },
+  {
+    "id": "0f43f673-38c1-4700-8e44-bb59363a9999",
+    "name": "Michel Johnson",
+    "email": "michel@corp.in",
+    "role": "Representative",
+    "manager": {
+      "id": "27af49e7-eade-4225-a3db-0bd3405cd54e",
+      "name": "Ethan Williams",
+      "email": "ethan@corp.in"
+    }
+  },
+  {
+    "id": "13c0e2f1-686b-447c-a895-6f989bd49eca",
+    "name": "John Doe",
+    "email": "john@corp.in",
+    "role": "Representative",
+    "manager": {
+      "id": "c76a09cb-113e-4688-9517-f11e1383d4e7",
+      "name": "Olivia Jones",
+      "email": "Olivia@corp.in"
+    }
+  },
+  {
+    "id": "6f74bbdc-2f84-4972-b4ca-e22ac066a0dd",
+    "name": "Andrew Smith",
+    "email": "andrew@corp.in",
+    "role": "Representative",
+    "manager": {
+      "id": "fa67f611-c67a-460d-a313-143685dc2dda",
+      "name": "Samantha Taylor",
+      "email": "samantha@corp.in"
+    }
+  }
+]

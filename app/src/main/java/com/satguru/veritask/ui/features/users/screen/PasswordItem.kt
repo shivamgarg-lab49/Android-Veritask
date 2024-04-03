@@ -156,6 +156,9 @@ fun PasswordItemPreview() {
             .padding(vertical = 100.dp, horizontal = 24.dp)
             .background(MaterialTheme.colors.fcl_neutral_700, RoundedCornerShape(8.dp))
     ) {
-        PasswordItem(user = PreviewDataProvider.user, onLogin = {}, onBack = {})
+        PasswordItem(
+            user = PreviewDataProvider.getUsers(LocalContext.current).first(),
+            onLogin = {},
+            onBack = {})
     }
 }

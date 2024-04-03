@@ -13,6 +13,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.satguru.veritask.di.PreviewDataProvider
@@ -58,5 +59,5 @@ fun UserItem(user: User, onItemClick: (User) -> Unit = {}) {
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun UsersItemPreview() {
-    UserItem(user = PreviewDataProvider.user)
+    UserItem(user = PreviewDataProvider.getUsers(LocalContext.current).first())
 }

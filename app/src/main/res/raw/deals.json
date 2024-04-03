@@ -1,0 +1,209 @@
+[
+  {
+    "id": "966b1ff4-dae3-4d91-924c-e0a59ad72361",
+    "clientId": "00476821-f87c-4164-9ba8-55a36bc67aaf",
+    "creatorId": "0f43f673-38c1-4700-8e44-bb59363a9999",
+    "approverId": "27af49e7-eade-4225-a3db-0bd3405cd54e",
+    "createdAt": "2024-04-02T18:26:57.090Z",
+    "updatedAt": "2024-04-02T18:36:19.997Z",
+    "totalQuantity": 4,
+    "transactionValue": "8241.47",
+    "status": "Pending",
+    "reason": null,
+    "client": {
+      "name": "Horizon Equity Group"
+    },
+    "approver": {
+      "name": "Ethan Williams",
+      "email": "ethan@corp.in"
+    },
+    "creator": {
+      "name": "Michel Johnson",
+      "email": "michel@corp.in"
+    }
+  },
+  {
+    "id": "531b7028-cb37-4be6-9a19-ccd2b0cd1cb2",
+    "clientId": "50c078d1-99aa-4f3d-87f7-8d1021e2c7e9",
+    "creatorId": "0f43f673-38c1-4700-8e44-bb59363a9999",
+    "approverId": "27af49e7-eade-4225-a3db-0bd3405cd54e",
+    "createdAt": "2024-04-02T14:19:56.932Z",
+    "updatedAt": "2024-04-02T14:19:56.932Z",
+    "totalQuantity": 3,
+    "transactionValue": "7475.19",
+    "status": "Pending",
+    "reason": null,
+    "client": {
+      "name": "Everest Global Investments"
+    },
+    "approver": {
+      "name": "Ethan Williams",
+      "email": "ethan@corp.in"
+    },
+    "creator": {
+      "name": "Michel Johnson",
+      "email": "michel@corp.in"
+    }
+  },
+  {
+    "id": "73cf4129-4960-448c-96eb-4f37df3f959d",
+    "clientId": "50c078d1-99aa-4f3d-87f7-8d1021e2c7e9",
+    "creatorId": "0f43f673-38c1-4700-8e44-bb59363a9999",
+    "approverId": "27af49e7-eade-4225-a3db-0bd3405cd54e",
+    "createdAt": "2024-04-02T13:33:57.174Z",
+    "updatedAt": "2024-04-02T13:33:57.174Z",
+    "totalQuantity": 1,
+    "transactionValue": "2020.05",
+    "status": "Pending",
+    "reason": null,
+    "client": {
+      "name": "Everest Global Investments"
+    },
+    "approver": {
+      "name": "Ethan Williams",
+      "email": "ethan@corp.in"
+    },
+    "creator": {
+      "name": "Michel Johnson",
+      "email": "michel@corp.in"
+    }
+  },
+  {
+    "id": "e22c5c88-669e-4b9e-b90c-e46617858032",
+    "clientId": "19205ab5-1b00-4bcb-a8a1-aa02672e9f67",
+    "creatorId": "0f43f673-38c1-4700-8e44-bb59363a9999",
+    "approverId": "27af49e7-eade-4225-a3db-0bd3405cd54e",
+    "createdAt": "2024-04-02T12:38:36.965Z",
+    "updatedAt": "2024-04-02T13:02:52.337Z",
+    "totalQuantity": 1,
+    "transactionValue": "2020.05",
+    "status": "Approved",
+    "reason": null,
+    "client": {
+      "name": "Liberty Capital Partners"
+    },
+    "approver": {
+      "name": "Ethan Williams",
+      "email": "ethan@corp.in"
+    },
+    "creator": {
+      "name": "Michel Johnson",
+      "email": "michel@corp.in"
+    }
+  },
+  {
+    "id": "9b434ef4-2316-4f68-94ee-bad378674242",
+    "clientId": "50c078d1-99aa-4f3d-87f7-8d1021e2c7e9",
+    "creatorId": "0f43f673-38c1-4700-8e44-bb59363a9999",
+    "approverId": "27af49e7-eade-4225-a3db-0bd3405cd54e",
+    "createdAt": "2024-04-02T12:37:48.466Z",
+    "updatedAt": "2024-04-02T12:37:48.466Z",
+    "totalQuantity": 1,
+    "transactionValue": "5050.26",
+    "status": "Pending",
+    "reason": null,
+    "client": {
+      "name": "Everest Global Investments"
+    },
+    "approver": {
+      "name": "Ethan Williams",
+      "email": "ethan@corp.in"
+    },
+    "creator": {
+      "name": "Michel Johnson",
+      "email": "michel@corp.in"
+    }
+  },
+  {
+    "id": "36076ff8-ca2f-4a78-ad2a-8d96619214a3",
+    "clientId": "50c078d1-99aa-4f3d-87f7-8d1021e2c7e9",
+    "creatorId": "0f43f673-38c1-4700-8e44-bb59363a9999",
+    "approverId": "27af49e7-eade-4225-a3db-0bd3405cd54e",
+    "createdAt": "2024-04-02T12:24:31.627Z",
+    "updatedAt": "2024-04-02T12:24:31.627Z",
+    "totalQuantity": 1,
+    "transactionValue": "418.54",
+    "status": "Pending",
+    "reason": null,
+    "client": {
+      "name": "Everest Global Investments"
+    },
+    "approver": {
+      "name": "Ethan Williams",
+      "email": "ethan@corp.in"
+    },
+    "creator": {
+      "name": "Michel Johnson",
+      "email": "michel@corp.in"
+    }
+  },
+  {
+    "id": "c134d84a-25da-4575-ab27-332041be9e41",
+    "clientId": "50c078d1-99aa-4f3d-87f7-8d1021e2c7e9",
+    "creatorId": "0f43f673-38c1-4700-8e44-bb59363a9999",
+    "approverId": "27af49e7-eade-4225-a3db-0bd3405cd54e",
+    "createdAt": "2024-04-02T12:18:04.565Z",
+    "updatedAt": "2024-04-02T12:18:04.565Z",
+    "totalQuantity": 1,
+    "transactionValue": "5050.26",
+    "status": "Pending",
+    "reason": null,
+    "client": {
+      "name": "Everest Global Investments"
+    },
+    "approver": {
+      "name": "Ethan Williams",
+      "email": "ethan@corp.in"
+    },
+    "creator": {
+      "name": "Michel Johnson",
+      "email": "michel@corp.in"
+    }
+  },
+  {
+    "id": "c1e7c07e-f283-4214-8b78-a5652683cfc6",
+    "clientId": "50c078d1-99aa-4f3d-87f7-8d1021e2c7e9",
+    "creatorId": "0f43f673-38c1-4700-8e44-bb59363a9999",
+    "approverId": "27af49e7-eade-4225-a3db-0bd3405cd54e",
+    "createdAt": "2024-04-02T12:14:24.285Z",
+    "updatedAt": "2024-04-02T12:14:24.285Z",
+    "totalQuantity": 1,
+    "transactionValue": "527.4",
+    "status": "Pending",
+    "reason": null,
+    "client": {
+      "name": "Everest Global Investments"
+    },
+    "approver": {
+      "name": "Ethan Williams",
+      "email": "ethan@corp.in"
+    },
+    "creator": {
+      "name": "Michel Johnson",
+      "email": "michel@corp.in"
+    }
+  },
+  {
+    "id": "75b75e0c-7e44-4246-a1e7-b8b556810d2f",
+    "clientId": "9da86fd1-06bb-47af-b63c-3c6f70a4b932",
+    "creatorId": "0f43f673-38c1-4700-8e44-bb59363a9999",
+    "approverId": "27af49e7-eade-4225-a3db-0bd3405cd54e",
+    "createdAt": "2024-04-02T12:12:19.379Z",
+    "updatedAt": "2024-04-02T12:12:19.379Z",
+    "totalQuantity": 1,
+    "transactionValue": "2020.05",
+    "status": "Pending",
+    "reason": null,
+    "client": {
+      "name": "Quantum Capital Management"
+    },
+    "approver": {
+      "name": "Ethan Williams",
+      "email": "ethan@corp.in"
+    },
+    "creator": {
+      "name": "Michel Johnson",
+      "email": "michel@corp.in"
+    }
+  }
+]
