@@ -4,4 +4,10 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class VeriTaskApplication : Application()
+class VeriTaskApplication : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+        AppLifecycleObserver.init()
+    }
+}

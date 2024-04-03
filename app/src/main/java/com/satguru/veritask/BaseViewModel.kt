@@ -26,6 +26,13 @@ abstract class BaseViewModel(
     private val _uiStateForLoginApi = MutableStateFlow<UiState<DeviceInfo>>(UiState.Ideal)
     val uiStateForLoginData get() = _uiStateForLoginApi.asStateFlow()
 
+    private val _selectedUser = MutableStateFlow<Users?>(null)
+    val selectedUser = _selectedUser.asStateFlow()
+
+    fun setSelectedUser(users: Users?) {
+        _selectedUser.value = users
+    }
+
     fun checkLoginState(userLoggedIn: () -> Unit, userNotLoggedIn: () -> Unit) {
         if (repositoryService.getSharedPreference().isLoggedIn()) {
             userLoggedIn()

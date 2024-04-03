@@ -45,4 +45,9 @@
     <string name="view_other_tasks_pending_approval">View Other Tasks Pending Approval</string>
     <string name="will_be_notified">will be notified.</string>
     <string name="reason_for_rejection">Reason for Rejection</string>
+    <string name="pick_an_account">Pick an Account</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="back">Back</string>
 </resources>
