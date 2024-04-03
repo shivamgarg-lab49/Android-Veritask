@@ -44,6 +44,9 @@ object NotificationHelper {
         notificationId: Int,
         loggedInUser: User?
     ) {
+        // create notification channel
+        createNotificationChannel(context)
+
         val gson = Gson()
         val gsonType = object : TypeToken<Any?>() {}.type
         val gsonString: String = gson.toJson(remoteMessage.data, gsonType)
@@ -61,9 +64,6 @@ object NotificationHelper {
         }
         println("onMessageReceived--->>>  check passed, about to show notification")
         println("onMessageReceived--------------------------------------------")
-
-        // create notification channel
-        createNotificationChannel(context)
 
         // setup title and message
         val title = remoteMessage.data[EXTRA_TITLE].orEmpty()
