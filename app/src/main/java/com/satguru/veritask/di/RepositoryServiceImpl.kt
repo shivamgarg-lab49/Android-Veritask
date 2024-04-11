@@ -22,8 +22,8 @@ class RepositoryServiceImpl @Inject constructor(
         return networkCall { apiService.getUsers() }
     }
 
-    override fun getDeals(): Flow<UiState<BaseResponse<List<Sales>>>> {
-        return networkCall { apiService.getDeals() }
+    override fun getDeals(managerId: String): Flow<UiState<BaseResponse<List<Sales>>>> {
+        return networkCall { apiService.getDeals(managerId) }
     }
 
     override fun getDealDetails(dealId: String): Flow<UiState<BaseResponse<Sales>>> {

@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.Flow
 interface RepositoryService {
 
     fun getUsers(): Flow<UiState<BaseResponse<List<User>>>>
-    fun getDeals(): Flow<UiState<BaseResponse<List<Sales>>>>
+    fun getDeals(managerId: String): Flow<UiState<BaseResponse<List<Sales>>>>
     fun getDealDetails(dealId: String): Flow<UiState<BaseResponse<Sales>>>
 
     fun getRejectReasons(): Flow<UiState<BaseResponse<List<RejectReasonItem>>>>

@@ -10,6 +10,7 @@ import com.satguru.veritask.models.User
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -17,8 +18,9 @@ import retrofit2.http.Path
 interface ApiService {
     @GET("api/users")
     suspend fun getUsers(): Response<BaseResponse<List<User>>>
+
     @GET("api/deals")
-    suspend fun getDeals(): Response<BaseResponse<List<Sales>>>
+    suspend fun getDeals(@Header("userId") managerId: String): Response<BaseResponse<List<Sales>>>
 
     @GET("api/deals/{dealId}")
     suspend fun getDealDetails(@Path("dealId") dealId: String): Response<BaseResponse<Sales>>

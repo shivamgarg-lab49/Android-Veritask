@@ -55,7 +55,6 @@ class SalesViewModel @Inject constructor(
                     UiState.Success(
                         t2.data
                             .filter { sales -> sales.status == _indexMapping[t1] }
-                            .filter { sales -> return@filter if (loggedInUserId.isNullOrBlank() || t3.not()) true else loggedInUserId == sales.approverId }
                     )
                 }
 
@@ -79,7 +78,7 @@ class SalesViewModel @Inject constructor(
 
     fun fetch(opType: OpType) {
         _dealsJob?.cancel()
-        _dealsJob = repositoryService.getDeals().onEach {
+        _dealsJob = repositoryService.getDeals(getLoggedInUser()?.id.orEmpty()).onEach {
             when (it) {
                 is UiState.Loading -> {
                     if (opType == OpType.Pull) {
