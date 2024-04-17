@@ -97,7 +97,7 @@ dependencies {
     ksp("io.github.raamcosta.compose-destinations:ksp:1.10.1")
 
     implementation("com.google.dagger:hilt-android:2.50")
-    ksp("com.google.dagger:hilt-android-compiler:2.48.1")
+    ksp("com.google.dagger:hilt-android-compiler:2.50")
 
     implementation("com.google.accompanist:accompanist-permissions:0.34.0")
 

@@ -6,7 +6,7 @@ import kotlinx.coroutines.withTimeout
 import retrofit2.Response
 
 inline fun <reified ResponseType> networkCall(
-    timeout: Long = 10000,
+    timeout: Long = 20000,
     showLoader: Boolean = true,
     crossinline fetch: suspend () -> Response<ResponseType>,
 ) = flow<UiState<ResponseType>> {

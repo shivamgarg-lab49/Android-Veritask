@@ -20,6 +20,7 @@ import com.satguru.veritask.DeeplinkActivity
 import com.satguru.veritask.R
 import com.satguru.veritask.SharedApp
 import com.satguru.veritask.models.User
+import com.satguru.veritask.services.NotificationClickReceiver
 
 
 object NotificationHelper {
@@ -30,8 +31,9 @@ object NotificationHelper {
     private const val EXTRA_DEAL_ID = "dealId"
 
 
-    private const val TYPE_DEAL_CREATED = "DealCreated"
-    private val SUPPORTED_TYPES = listOf(TYPE_DEAL_CREATED)
+    private const val TYPE_SMALL_DEAL_CREATED = "SmallDeal"
+    private const val TYPE_LARGE_DEAL_CREATED = "LargeDeal"
+    private val SUPPORTED_TYPES = listOf(TYPE_SMALL_DEAL_CREATED, TYPE_LARGE_DEAL_CREATED)
 
 
     private const val CHANNEL_ID = "default"
@@ -78,7 +80,7 @@ object NotificationHelper {
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 
         when (notificationType) {
-            TYPE_DEAL_CREATED -> {
+            TYPE_SMALL_DEAL_CREATED -> {
                 val dealId = remoteMessage.data[EXTRA_DEAL_ID].orEmpty()
                 builder.setContentIntent(
                     getDealDetailIntent(
@@ -91,12 +93,30 @@ object NotificationHelper {
                 builder.addAction(
                     0,
                     context.getString(R.string.approve),
-                    getDealDetailIntent(context, dealId, Constants.APPROVED, notificationId)
+                    getDealDetailBroadcastIntent(
+                        context,
+                        dealId,
+                        Constants.APPROVED,
+                        notificationId
+                    )
                 )
                 builder.addAction(
                     0,
                     context.getString(R.string.reject_with_comments),
                     getDealDetailIntent(context, dealId, Constants.REJECTED, notificationId)
+                )
+                SharedApp.postMessage(BaseMessage.DealCreatedMessage(dealId = dealId))
+            }
+
+            TYPE_LARGE_DEAL_CREATED -> {
+                val dealId = remoteMessage.data[EXTRA_DEAL_ID].orEmpty()
+                builder.setContentIntent(
+                    getDealDetailIntent(
+                        context,
+                        dealId,
+                        Constants.NO_ACTION,
+                        notificationId
+                    )
                 )
                 SharedApp.postMessage(BaseMessage.DealCreatedMessage(dealId = dealId))
             }
@@ -107,6 +127,14 @@ object NotificationHelper {
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(notificationId, builder.build())
+    }
+
+    fun dismissNotification(context: Context, intent: Intent) {
+        val notificationId = intent.getIntExtra(Constants.NOTIFICATION_ID, 0)
+        if (notificationId > 0) {
+            val notificationManager = context.getSystemService(NotificationManager::class.java)
+            notificationManager.cancel(notificationId)
+        }
     }
 
     private fun areNotificationOn(context: Context): Boolean {
@@ -152,5 +180,20 @@ object NotificationHelper {
         intent.putExtra(Constants.NOTIFICATION_ID, notificationId)
         intent.data = Uri.parse(DeepLinkBuilder.createDealsDetailDeepLink(dealId, action))
         return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+    }
+
+    private fun getDealDetailBroadcastIntent(
+        context: Context,
+        dealId: String,
+        action: String,
+        notificationId: Int
+    ): PendingIntent {
+        val intent = Intent(
+            context,
+            NotificationClickReceiver::class.java
+        )
+        intent.putExtra(Constants.NOTIFICATION_ID, notificationId)
+        intent.data = Uri.parse(DeepLinkBuilder.createDealsDetailDeepLink(dealId, action))
+        return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
     }
 }
