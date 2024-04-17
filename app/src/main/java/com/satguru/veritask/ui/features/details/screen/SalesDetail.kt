@@ -451,7 +451,7 @@ fun ProductRowItem(
             fontWeight = fontWeight,
             text = quantity,
             modifier = Modifier
-                .weight(1f)
+                .weight(1.2f)
                 .padding(horizontal = 4.dp)
         )
         Text(
