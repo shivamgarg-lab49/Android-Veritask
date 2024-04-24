@@ -124,56 +124,56 @@ val Typography.fcl_caption2: TextStyle
     )
 
 val Colors.fcl_fill_page: Color
-    get() = if (isLight) Color(0xff171A1C) else Color(0xff171A1C)
+    get() = if (isLight) Color(0xffE5E5E5) else Color(0xff171A1C)
 
 val Colors.fcl_fill_container: Color
-    get() = if (isLight) Color(0xff1B2124) else Color(0xff1B2124)
+    get() = if (isLight) Color(0xffF2F2F2) else Color(0xff1B2124)
 
 val Colors.fcl_fill_component: Color
-    get() = if (isLight) Color(0xff3A4348) else Color(0xff3A4348)
+    get() = if (isLight) Color(0xffFCFCFC) else Color(0xff3A4348)
 
 // Content
 val Colors.fcl_content: Color
-    get() = if (isLight) Color(0xffDCEAF5) else Color(0xffDCEAF5)
+    get() = if (isLight) Color(0xff3D4F5C) else Color(0xffDCEAF5)
 
 val Colors.fcl_content_plus: Color
-    get() = if (isLight) Color(0xffACBAC5) else Color(0xffACBAC5)
+    get() = if (isLight) Color(0xff52697A) else Color(0xffACBAC5)
 
 val Colors.fcl_content_subtle: Color
-    get() = if (isLight) Color(0xff7C8A94) else Color(0xff7C8A94)
+    get() = if (isLight) Color(0xff668399) else Color(0xff7C8A94)
 
 val Colors.fcl_content_dark: Color
-    get() = if (isLight) Color(0xff5E676E) else Color(0xff5E676E)
+    get() = if (isLight) Color(0xff668399) else Color(0xff5E676E)
 
 val Colors.fcl_primary_100: Color
-    get() = if (isLight) Color(0xff8FEBFA) else Color(0xff8FEBFA)
+    get() = if (isLight) Color(0xff174B62) else Color(0xff8FEBFA)
 
 val Colors.fcl_primary_300: Color
-    get() = if (isLight) Color(0xff24CAEC) else Color(0xff24CAEC)
+    get() = if (isLight) Color(0xff0A8AB0) else Color(0xff24CAEC)
 
 val Colors.fcl_primary_500: Color
     get() = if (isLight) Color(0xff08ADD2) else Color(0xff08ADD2)
 
 val Colors.fcl_primary_700: Color
-    get() = if (isLight) Color(0xff0A8AB0) else Color(0xff0A8AB0)
+    get() = if (isLight) Color(0xff24CAEC) else Color(0xff0A8AB0)
 
 val Colors.fcl_primary_900: Color
-    get() = if (isLight) Color(0xff0A8AB0) else Color(0xff0A8AB0)
+    get() = if (isLight) Color(0xff8FEBFA) else Color(0xff0A8AB0)
 
 val Colors.fcl_secondary_100: Color
-    get() = if (isLight) Color(0xffFFD1C8) else Color(0xffFFD1C8)
+    get() = if (isLight) Color(0xff842A18) else Color(0xffFFD1C8)
 
 val Colors.fcl_secondary_300: Color
-    get() = if (isLight) Color(0xffFFB1A1) else Color(0xffFFB1A1)
+    get() = if (isLight) Color(0xffC03215) else Color(0xffFFB1A1)
 
 val Colors.fcl_secondary_500: Color
     get() = if (isLight) Color(0xffF86F53) else Color(0xffF86F53)
 
 val Colors.fcl_secondary_700: Color
-    get() = if (isLight) Color(0xffC03215) else Color(0xffC03215)
+    get() = if (isLight) Color(0xffFFB1A1) else Color(0xffC03215)
 
 val Colors.fcl_secondary_900: Color
-    get() = if (isLight) Color(0xff842A18) else Color(0xff842A18)
+    get() = if (isLight) Color(0xffFFD1C8) else Color(0xff842A18)
 
 val Colors.fcl_neutral_100: Color
     get() = if (isLight) Color(0xffF2F2F2) else Color(0xffF2F2F2)
@@ -191,31 +191,34 @@ val Colors.fcl_neutral_900: Color
     get() = if (isLight) Color(0xff171A1C) else Color(0xff171A1C)
 
 val Colors.fcl_status_warn_300: Color
-    get() = if (isLight) Color(0xffF86F53) else Color(0xffF86F53)
+    get() = if (isLight) Color(0xffF55C3D) else Color(0xffF86F53)
 
 val Colors.fcl_status_warn_500: Color
-    get() = if (isLight) Color(0xffA14F3E) else Color(0xffA14F3E)
+    get() = if (isLight) Color(0xffF7856E) else Color(0xffA14F3E)
 
-val Colors.fcl_status_warn_900: Color
-    get() = if (isLight) Color(0xff4A2E29) else Color(0xff4A2E29)
+val Colors.fcl_status_warn_700: Color
+    get() = if (isLight) Color(0xffFAAD9E) else Color(0xff4A2E29)
 
 val Colors.fcl_status_normal_300: Color
-    get() = if (isLight) Color(0xff8FEBFA) else Color(0xff8FEBFA)
+    get() = if (isLight) Color(0xff196066) else Color(0xff8FEBFA)
 
 val Colors.fcl_status_normal_500: Color
     get() = if (isLight) Color(0xff488596) else Color(0xff488596)
 
-val Colors.fcl_status_normal_900: Color
-    get() = if (isLight) Color(0xff196066) else Color(0xff196066)
+val Colors.fcl_status_normal_700: Color
+    get() = if (isLight) Color(0xff8FEBFA) else Color(0xff196066)
 
 val Colors.fcl_status_success_300: Color
-    get() = if (isLight) Color(0xff14B89C) else Color(0xff14B89C)
+    get() = if (isLight) Color(0xffAEEAE0) else Color(0xff14B89C)
 
 val Colors.fcl_status_success_500: Color
-    get() = if (isLight) Color(0xff178270) else Color(0xff178270)
+    get() = if (isLight) Color(0xff85E0D1) else Color(0xff178270)
 
-val Colors.fcl_status_success_900: Color
-    get() = if (isLight) Color(0xff0A5C4E) else Color(0xff0A5C4E)
+val Colors.fcl_status_success_700: Color
+    get() = if (isLight) Color(0xff5DD5C1) else Color(0xff0A5C4E)
+
+val Colors.fcl_extra_1_details: Color
+    get() = if (isLight) Color(0xff171A1C) else Color(0xffDCEAF5)
 
 @Composable
 fun VeriTaskTheme(

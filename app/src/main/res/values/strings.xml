@@ -9,7 +9,7 @@
     <string name="sales_rep">Sales Rep</string>
     <string name="retry">Retry</string>
     <string name="something_went_wrong">Something went wrong</string>
-    <string name="no_sales_found">No sales found</string>
+    <string name="no_sales_found">No sales approval requested</string>
     <string name="no_users_found">No users found</string>
     <string name="sales_details">Sales-Details</string>
     <string name="back_arrow">Back Arrow</string>

@@ -1,5 +1,6 @@
 package com.satguru.veritask.ui.features.details.screen
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -59,6 +59,7 @@ import com.satguru.veritask.ui.theme.fcl_body1
 import com.satguru.veritask.ui.theme.fcl_body2
 import com.satguru.veritask.ui.theme.fcl_content
 import com.satguru.veritask.ui.theme.fcl_content_subtle
+import com.satguru.veritask.ui.theme.fcl_extra_1_details
 import com.satguru.veritask.ui.theme.fcl_fill_component
 import com.satguru.veritask.ui.theme.fcl_fill_container
 import com.satguru.veritask.ui.theme.fcl_neutral_900
@@ -318,8 +319,10 @@ fun ApproveOrRejectedComposable(
 ) {
     Row(modifier = modifier) {
         Button(
-            modifier = Modifier.widthIn(115.dp),
+            modifier = Modifier,
             onClick = onRejected,
+            shape = RoundedCornerShape(4.dp),
+            contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp),
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = MaterialTheme.colors.fcl_fill_component,
                 contentColor = MaterialTheme.colors.fcl_content
@@ -333,8 +336,11 @@ fun ApproveOrRejectedComposable(
         }
         Spacer(modifier = Modifier.size(16.dp))
         Button(
-            modifier = Modifier.widthIn(115.dp),
+            modifier = Modifier,
             onClick = onApproved,
+            border = BorderStroke(1.dp, color = MaterialTheme.colors.fcl_primary_100),
+            shape = RoundedCornerShape(4.dp),
+            contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp),
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = MaterialTheme.colors.fcl_primary_100,
                 contentColor = MaterialTheme.colors.fcl_fill_container
@@ -391,7 +397,7 @@ fun SaleDetailRow(
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
             text = value,
-            color = MaterialTheme.colors.fcl_content,
+            color = MaterialTheme.colors.fcl_extra_1_details,
             style = MaterialTheme.typography.fcl_body2,
         )
     }
@@ -423,7 +429,7 @@ fun DealStatusRow(
                 .background(
                     color = valueTextBgColor, shape = RoundedCornerShape(6.dp)
                 )
-                .padding(horizontal = 10.dp, vertical = 3.dp)
+                .padding(horizontal = 8.dp, vertical = 2.dp)
         )
     }
 }
@@ -439,14 +445,14 @@ fun ProductRowItem(
             text = name,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            color = MaterialTheme.colors.fcl_content,
+            color = MaterialTheme.colors.fcl_extra_1_details,
             style = MaterialTheme.typography.fcl_body2,
             fontWeight = fontWeight,
             modifier = Modifier.weight(3f)
         )
         Text(
             textAlign = TextAlign.End,
-            color = MaterialTheme.colors.fcl_content,
+            color = MaterialTheme.colors.fcl_extra_1_details,
             style = MaterialTheme.typography.fcl_body2,
             fontWeight = fontWeight,
             text = quantity,
@@ -456,7 +462,7 @@ fun ProductRowItem(
         )
         Text(
             text = price,
-            color = MaterialTheme.colors.fcl_content,
+            color = MaterialTheme.colors.fcl_extra_1_details,
             style = MaterialTheme.typography.fcl_body2,
             fontWeight = fontWeight,
             textAlign = TextAlign.End,

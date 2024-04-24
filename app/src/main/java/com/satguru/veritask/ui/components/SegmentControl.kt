@@ -17,8 +17,8 @@ import androidx.compose.ui.unit.dp
 import com.satguru.veritask.ui.theme.fcl_body3
 import com.satguru.veritask.ui.theme.fcl_content
 import com.satguru.veritask.ui.theme.fcl_fill_component
+import com.satguru.veritask.ui.theme.fcl_fill_page
 import com.satguru.veritask.ui.theme.fcl_neutral_700
-import com.satguru.veritask.ui.theme.fcl_neutral_900
 
 /**
  * items : list of items to be render
@@ -97,7 +97,7 @@ fun SegmentedControl(
                     )
                 } else {
                     ButtonDefaults.outlinedButtonColors(
-                        backgroundColor = MaterialTheme.colors.fcl_neutral_900,
+                        backgroundColor = MaterialTheme.colors.fcl_fill_page,
                         contentColor = MaterialTheme.colors.fcl_content
                     )
                 },

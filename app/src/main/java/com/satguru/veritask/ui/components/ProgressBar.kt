@@ -7,14 +7,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.satguru.veritask.ui.theme.fcl_status_success_900
+import com.satguru.veritask.ui.theme.fcl_status_success_700
 
 @Composable
 fun ProgressBar(
     modifier: Modifier = Modifier,
     progressModifier: Modifier = Modifier,
     contentAlignment: Alignment = Alignment.Center,
-    color: Color = MaterialTheme.colors.fcl_status_success_900
+    color: Color = MaterialTheme.colors.fcl_status_success_700
 ) {
     Box(modifier = modifier, contentAlignment = contentAlignment) {
         CircularProgressIndicator(
