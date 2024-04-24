@@ -34,8 +34,8 @@
     <string name="successfully_approved">Approved</string>
     <string name="successfully_rejected">Rejected</string>
     <string name="logout">Logout</string>
-    <string name="login_successful">Login successful</string>
-    <string name="logout_successful">Logout successful</string>
+    <string name="login_successful">Login successfully</string>
+    <string name="logout_successful">Logged out successfully</string>
     <string name="context_menu_icon">Context Menu Icon</string>
     <string name="my_sales">My Sales</string>
     <string name="info_icon">Info Icon</string>

@@ -87,3 +87,8 @@ data class RejectReasonItem(
     val key: String,
     val description: String,
 )
+
+@Keep
+data class LogoutRequestResponse(
+    val deviceId: String
+)

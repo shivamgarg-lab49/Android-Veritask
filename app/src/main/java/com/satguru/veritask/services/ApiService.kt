@@ -4,6 +4,7 @@ import com.satguru.veritask.models.BaseResponse
 import com.satguru.veritask.models.DealApproveRequest
 import com.satguru.veritask.models.DealRejectRequest
 import com.satguru.veritask.models.DeviceInfo
+import com.satguru.veritask.models.LogoutRequestResponse
 import com.satguru.veritask.models.RejectReasonItem
 import com.satguru.veritask.models.Sales
 import com.satguru.veritask.models.User
@@ -42,4 +43,7 @@ interface ApiService {
 
     @POST("api/login")
     suspend fun login(@Body requestBody: DeviceInfo): Response<BaseResponse<DeviceInfo>>
+
+    @POST("api/logout")
+    suspend fun logout(@Body requestBody: LogoutRequestResponse): Response<BaseResponse<Int>>
 }

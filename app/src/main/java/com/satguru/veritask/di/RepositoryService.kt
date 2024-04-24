@@ -5,6 +5,7 @@ import com.satguru.veritask.models.BaseResponse
 import com.satguru.veritask.models.DealApproveRequest
 import com.satguru.veritask.models.DealRejectRequest
 import com.satguru.veritask.models.DeviceInfo
+import com.satguru.veritask.models.LogoutRequestResponse
 import com.satguru.veritask.models.RejectReasonItem
 import com.satguru.veritask.models.Sales
 import com.satguru.veritask.models.User
@@ -28,6 +29,8 @@ interface RepositoryService {
     ): Flow<UiState<BaseResponse<Sales>>>
 
     fun login(requestBody: DeviceInfo): Flow<UiState<BaseResponse<DeviceInfo>>>
+
+    fun logout(logout: LogoutRequestResponse): Flow<UiState<BaseResponse<Int>>>
 
     fun getSharedPreference(): SharedPreferences
 }

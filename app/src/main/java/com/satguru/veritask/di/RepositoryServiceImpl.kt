@@ -7,6 +7,7 @@ import com.satguru.veritask.models.DealRejectRequest
 import com.satguru.veritask.models.DeviceInfo
 import com.satguru.veritask.models.Sales
 import com.satguru.veritask.extensions.UiState
+import com.satguru.veritask.models.LogoutRequestResponse
 import com.satguru.veritask.models.RejectReasonItem
 import com.satguru.veritask.models.User
 import com.satguru.veritask.services.ApiService
@@ -48,6 +49,10 @@ class RepositoryServiceImpl @Inject constructor(
 
     override fun login(requestBody: DeviceInfo): Flow<UiState<BaseResponse<DeviceInfo>>> {
         return networkCall { apiService.login(requestBody) }
+    }
+
+    override fun logout(logout: LogoutRequestResponse): Flow<UiState<BaseResponse<Int>>> {
+        return networkCall { apiService.logout(logout) }
     }
 
 

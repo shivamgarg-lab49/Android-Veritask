@@ -27,6 +27,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
@@ -35,13 +36,17 @@ import com.satguru.veritask.BaseMessage
 import com.satguru.veritask.R
 import com.satguru.veritask.SharedApp
 import com.satguru.veritask.extensions.UiState
+import com.satguru.veritask.extensions.toast
 import com.satguru.veritask.models.Sales
 import com.satguru.veritask.ui.components.Empty
 import com.satguru.veritask.ui.components.ErrorScreen
 import com.satguru.veritask.ui.components.ProgressBar
+import com.satguru.veritask.ui.components.ProgressDialog
 import com.satguru.veritask.ui.components.SegmentedControl
 import com.satguru.veritask.ui.components.Toolbar
+import com.satguru.veritask.ui.features.destinations.SalesDestination
 import com.satguru.veritask.ui.features.destinations.SalesDetailsDestination
+import com.satguru.veritask.ui.features.destinations.UsersScreenDestination
 import com.satguru.veritask.ui.features.sales.vm.SalesViewModel
 import com.satguru.veritask.ui.theme.fcl_body2
 import com.satguru.veritask.ui.theme.fcl_content
@@ -62,6 +67,7 @@ fun Sales(
         verticalArrangement = Arrangement.Top,
     ) {
 
+        val logoutApiState by salesVM.uiStateForLogoutApi.collectAsState()
         val isRefreshing by salesVM.isRefreshing.collectAsState()
         val selectedTabIndex by salesVM.selectedTabIndex.collectAsState()
         val pullRefreshState =
@@ -71,7 +77,7 @@ fun Sales(
             val loggedInUser = salesVM.getLoggedInUser()
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.clickable { salesVM.logout(destinationsNavigator) }) {
+                modifier = Modifier.clickable { salesVM.logout() }) {
                 Text(
                     text = loggedInUser?.name ?: stringResource(id = R.string.logout),
                     color = MaterialTheme.colors.fcl_content,
@@ -141,6 +147,27 @@ fun Sales(
                     .onEach { salesVM.fetch(SalesViewModel.OpType.Fresh) }
                     .launchIn(this)
             })
+
+            when (logoutApiState) {
+                is UiState.Loading -> {
+                    ProgressDialog()
+                }
+
+                is UiState.Error -> {
+                    LocalContext.current.toast(stringResource(R.string.something_went_wrong))
+                }
+
+                is UiState.Success -> {
+                    LocalContext.current.toast(
+                        stringResource(id = R.string.logout_successful)
+                    )
+                    destinationsNavigator.navigate(route = UsersScreenDestination.route) {
+                        popUpTo(route = SalesDestination.route) {
+                            inclusive = true
+                        }
+                    }
+                }
+            }
         }
     }
 }

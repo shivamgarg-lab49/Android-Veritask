@@ -1,5 +1,6 @@
 package com.satguru.veritask.di
 
+import com.satguru.veritask.BuildConfig
 import com.satguru.veritask.services.ApiService
 import dagger.Module
 import dagger.Provides
@@ -27,16 +28,23 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideApiService(@Named("baseUrl") baseUrl: String): ApiService {
-        val client = OkHttpClient.Builder().apply {
+
+        var client = OkHttpClient.Builder().apply {
             this
                 .connectTimeout(5, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)
                 .writeTimeout(25, TimeUnit.SECONDS)
-        }.build()
+        }
+
+        if (BuildConfig.DEBUG) {
+            client = client.addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
+        }
 
         val retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
-            .client(client)
+            .client(client.build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         return retrofit.create(ApiService::class.java)

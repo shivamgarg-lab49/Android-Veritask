@@ -73,7 +73,7 @@ class MainActivity : ComponentActivity() {
         handleDeepLink(navController, intent)
     }
 
-    override fun onNewIntent(intent: Intent?) {
+    override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         handleDeepLink(navController, intent)
     }
